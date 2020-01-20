@@ -68,6 +68,17 @@ public:
         AnyPort = 0 //!< Special value that tells the system to pick any available port
     };
 
+    ////////////////////////////////////////////////////////////
+    /// \brief Socket options that me be set in the setOption function
+    /// 
+    ////////////////////////////////////////////////////////////
+    enum Option
+    {
+        DontLinger,
+        ReuseAddress,
+        KeepAlive,
+    };
+
 public:
 
     ////////////////////////////////////////////////////////////

@@ -196,5 +196,26 @@ Socket::Status UdpSocket::receive(Packet& packet, IpAddress& remoteAddress, unsi
     return status;
 }
 
+void UdpSocket::setOption(Option option, int value)
+{
+    // Create the internal socket if it doesn't exist
+    create();
+
+    switch (option)
+    {
+    case Option::DontLinger:
+        setsockopt(getHandle(), SOL_SOCKET, SO_DONTLINGER, (const char*)&value, sizeof value);
+        break;
+    case Option::KeepAlive:
+        setsockopt(getHandle(), SOL_SOCKET, SO_KEEPALIVE, (const char*)&value, sizeof value);
+        break;
+    case Option::ReuseAddress:
+        setsockopt(getHandle(), SOL_SOCKET, SO_REUSEADDR, (const char*)&value, sizeof value);
+        break;
+    default:
+        break; // Unknown
+    }
+}
+
 
 } // namespace sf
